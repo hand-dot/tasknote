@@ -1,0 +1,26 @@
+<ion-header no-border class="taskontable">
+  <ion-navbar>
+    <div class="info">
+      <button ion-button icon-only round color="oxford-blue">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+      <button ion-button icon-only round color="oxford-blue">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+      <button ion-button icon-only round color="oxford-blue">
+        <ion-icon name="md-information-circle"></ion-icon>
+      </button>
+    </div>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Icons left of text -->
+  <ion-tabs tabs-only tabsPlacement="top" tabsLayout="icon-start" color="oxford-blue">
+    <ion-tab tabTitle="Profile" tabIcon="md-person" [root]="settingRoot"></ion-tab>
+    <ion-tab tabTitle="Tasks" tabIcon="logo-buffer" [root]="taskRoot" tabBadge="1" tabBadgeStyle="danger"></ion-tab>
+    <ion-tab tabTitle="Messages" tabIcon="ios-text" [root]="settingRoot"></ion-tab>
+    <ion-tab tabTitle="Settings" tabIcon="settings" [root]="settingRoot"></ion-tab>
+  </ion-tabs>
+</ion-content>

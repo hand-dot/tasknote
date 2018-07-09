@@ -1,0 +1,74 @@
+<ion-header no-border>
+
+</ion-header>
+
+<ion-content>
+  <ion-toolbar no-border-top>
+    <ion-buttons end>
+      <button ion-button icon-only #button2>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-segment color="cerulean" [(ngModel)]="favorites">
+      <ion-segment-button value="running">
+        <ion-icon name="ios-play"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="featured">
+        <ion-icon name="heart"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="tags">
+        <ion-icon name="md-pricetag"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="filing">
+        <ion-icon name="ios-filing"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <!-- Cards -->
+  <ion-card *ngFor="let task of sharedService.tasks | async">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ sharedService.user.photoURL }}" />
+      </ion-avatar>
+      <h1> {{ task.title }}
+        <span class="tag"> DESIGN </span>
+      </h1>
+      <h2>
+        <ion-icon color="river-bed" name="md-pin"></ion-icon>
+        {{ task.place }}
+      </h2>
+    </ion-item>
+    <ion-card-content>
+      <p>{{ task.content }}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button color="wild-strawberry" ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button color="wild-strawberry" ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{ task.comments.length }}Comments</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button color="wild-strawberry" ion-button icon-left clear small>
+          <ion-icon name="md-attach"></ion-icon>
+          <div>Attached</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          12h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <div class="progress">
+    </div>
+  </ion-card>
+
+</ion-content>

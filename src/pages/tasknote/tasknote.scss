@@ -1,0 +1,20 @@
+tasknote {
+    .wrapper {
+        padding: 2rem 0 0 3.5rem;
+        color: color($colors, athens-gray-light);
+    }
+    .taskontable.header-md {
+        font-weight: lighter;
+        background-color: color($colors, oxford-blue);
+        background-image: url("../assets/imgs/logo.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .toolbar-background-md {
+        background-color: rgba($color:white, $alpha: 0.0)
+    }
+    .info {
+        // margin: 6.0vh 2.0vw 0 0;
+        float: right;
+    }
+}

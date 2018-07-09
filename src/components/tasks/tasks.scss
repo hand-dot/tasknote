@@ -1,0 +1,48 @@
+tasks {
+    .scroll-content {
+        // Tab Page background color
+        // background-color: color($colors, athens-gray-light);
+    }
+    .toolbar-background-md {
+        background-color: rgba($color:white, $alpha: 0.0)
+    }
+    .card.card-md {
+        margin-top: 20px;
+        .item.item-block.item-md,
+        .card-content.card-content-md {
+            h1,
+            h2,
+            h3,
+            p {
+                color: color($colors, comet);
+                background-color: inherit;
+            }
+            h1 {
+                font-size: 2.6rem;
+                font-weight: bolder;
+                color: color($colors, wild-strawberry);
+            }
+            h2 {
+                font-weight: lighter;
+            }
+            h3 {
+                font-weight: lighter;
+            }
+            p {
+                font-size: 1.8rem;
+                font-weight: lighter;
+            }
+        }
+        .tag {
+            float: right;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: color($colors, manatee);
+        }
+        .progress {
+            background-color: color($colors, wild-strawberry);
+            width: 90%;
+            height: 2px;
+        }
+    }
+}
