@@ -3,12 +3,10 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Platform } from 'ionic-angular';
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { User, Task } from '../common/interfaces';
 import { map } from 'rxjs-compat/operators/map';
 import { Observable } from 'rxjs';
-import { Status, Weekday } from '../common/constants';
 
 @Injectable()
 export class SharedService {
@@ -17,9 +15,9 @@ export class SharedService {
     userCollection: AngularFirestoreCollection<String>;
 
     constructor(private angularFireAuth: AngularFireAuth, private angularFirestore: AngularFirestore, private googlePlus: GooglePlus, platform: Platform) {
+        this.userCollection = this.angularFirestore.collection('users');
         firebase.auth().onAuthStateChanged(user => {
             this.user = user;
-            this.userCollection = this.angularFirestore.collection('users');
 
             const googleLogin = platform.is('cordova')
                 ? this.nativeGoogleLogin()
@@ -40,20 +38,21 @@ export class SharedService {
         });
     }
 
-    addTask() {
-        const firestoreId = this.angularFirestore.createId();
-        this.userCollection.doc(this.user.uid).collection('tasks').add({
-            taskId: '0001',
-            uid: this.user.uid,
-            title: 'Final Fantasy',
-            content: 'Listen to my story',
-            place: 'For the Fifteenth',
-            status: Status.Canceled,
-            schedule: { date: new Date(), weekday: Weekday.Friday, interval: 10 },
-            likes: [{ uid: '', likeId: '' }],
-            comments: [{ uid: '', commentId: '', comment: '' }],
-            createdAt: new Date()
-        });
+    addTask(task: Task) {
+        this.userCollection.doc(this.user.uid).collection('tasks').add(task);
+        // const firestoreId = this.angularFirestore.createId();
+        // this.userCollection.doc(this.user.uid).collection('tasks').add({
+        //     taskId: '0001',
+        //     uid: this.user.uid,
+        //     title: 'Final Fantasy',
+        //     content: 'Listen to my story',
+        //     place: 'For the Fifteenth',
+        //     status: Status.Canceled,
+        //     schedule: { date: new Date(), weekday: Weekday.Friday, interval: 10 },
+        //     likes: [{ uid: '', likeId: '' }],
+        //     comments: [{ uid: '', commentId: '', comment: '' }],
+        //     createdAt: new Date()
+        // });
     }
 
     nativeGoogleLogin(): Promise<User> {

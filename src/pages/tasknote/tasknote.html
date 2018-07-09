@@ -1,4 +1,4 @@
-<ion-header no-border class="taskontable">
+<ion-header no-border class="tasknote">
   <ion-navbar>
     <div class="info">
       <button ion-button icon-only round color="oxford-blue">
@@ -18,9 +18,9 @@
 <ion-content>
   <!-- Icons left of text -->
   <ion-tabs tabs-only tabsPlacement="top" tabsLayout="icon-start" color="oxford-blue">
-    <ion-tab tabTitle="Profile" tabIcon="md-person" [root]="settingRoot"></ion-tab>
-    <ion-tab tabTitle="Tasks" tabIcon="logo-buffer" [root]="taskRoot" tabBadge="1" tabBadgeStyle="danger"></ion-tab>
-    <ion-tab tabTitle="Messages" tabIcon="ios-text" [root]="settingRoot"></ion-tab>
-    <ion-tab tabTitle="Settings" tabIcon="settings" [root]="settingRoot"></ion-tab>
+    <ion-tab tabTitle="Profile" tabIcon="md-person" [root]="profile"></ion-tab>
+    <ion-tab tabTitle="Tasks" tabIcon="logo-buffer" [root]="tasks" tabBadge="1" tabBadgeStyle="danger"></ion-tab>
+    <ion-tab tabTitle="Messages" tabIcon="ios-text" [root]="settings"></ion-tab>
+    <ion-tab tabTitle="Settings" tabIcon="settings" [root]="settings"></ion-tab>
   </ion-tabs>
 </ion-content>

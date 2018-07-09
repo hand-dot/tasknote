@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SharedService } from './../../services/sharedservice';
+import { SharedService } from '../../services/sharedservice';
 
 import { Status, Weekday } from '../../common/constants';
 

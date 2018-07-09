@@ -14,6 +14,7 @@ import { firebaseConfig } from './conf';
 
 import { MyApp } from './app.component';
 import { Tasknote } from '../pages/tasknote/tasknote';
+import { Profile } from '../components/profile/profile';
 import { Tasks } from '../components/tasks/tasks';
 import { Settings } from '../components/settings/settings';
 import { SharedService } from '../services/sharedservice';
@@ -22,6 +23,7 @@ import { SharedService } from '../services/sharedservice';
   declarations: [
     MyApp,
     Tasknote,
+    Profile,
     Tasks,
     Settings
   ],
@@ -37,6 +39,7 @@ import { SharedService } from '../services/sharedservice';
   entryComponents: [
     MyApp,
     Tasknote,
+    Profile,
     Tasks,
     Settings
   ],
