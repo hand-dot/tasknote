@@ -14,13 +14,13 @@ tasks {
             h2,
             h3,
             p {
-                color: color($colors, comet);
+                color: color($colors, gray);
                 background-color: inherit;
             }
             h1 {
                 font-size: 2.6rem;
                 font-weight: bolder;
-                color: color($colors, wild-strawberry);
+                color: color($colors, accent);
             }
             h2 {
                 font-weight: lighter;
@@ -37,10 +37,10 @@ tasks {
             float: right;
             font-size: 1.2rem;
             font-weight: bold;
-            color: color($colors, manatee);
+            color: color($colors, light-gray);
         }
         .progress {
-            background-color: color($colors, wild-strawberry);
+            background-color: color($colors, accent);
             width: 90%;
             height: 2px;
         }

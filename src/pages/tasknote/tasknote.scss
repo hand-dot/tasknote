@@ -1,12 +1,12 @@
 tasknote {
     .wrapper {
         padding: 2rem 0 0 3.5rem;
-        color: color($colors, athens-gray-light);
+        color: color($colors, extra-light-gray);
     }
     .header.header-md {
         font-weight: lighter;
-        background-color: color($colors, oxford-blue);
-        background-image: url("../assets/imgs/logo.png");
+        background-color: color($colors, primary);
+        background-image: url("../assets/imgs/header.png");
         background-repeat: no-repeat;
         background-size: contain;
     }

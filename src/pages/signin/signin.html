@@ -1,9 +1,29 @@
-<ion-header no-border class="tasknote">
+<ion-header no-border>
   <ion-navbar>
-    <ion-title></ion-title>
+    <ion-title> </ion-title>
+    <div class="logo-small"></div>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <div style="text-align: center; margin-top: 10%">
+    <img src="../assets/imgs/ts-logo.svg" />
+  </div>
 
+  <div padding>
+    <button ion-button color="google" block (click)="signIn()">
+      <ion-icon name="logo-googleplus"></ion-icon>
+      Sign in with Google
+    </button>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="row">
+      <a class="text left">Engish (United States) </a>
+      <a class="text right">Terms</a>
+      <a class="text right">Privacy</a>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

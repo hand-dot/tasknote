@@ -34,22 +34,27 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    rgba(72, 138, 255, 1),
-  secondary:  rgba(50, 219, 100, 1),
-  danger:     rgba(245, 61, 61, 1),
-  ebony-clasy: rgba(44, 49, 71, 1),
-  oxford-blue: rgba(55, 61, 89, 1),
-  river-bed: rgba(71, 76, 95, 1),
-  comet: rgba(80, 86, 119, 1),
-  manatee: rgba(137, 140, 153, 1),
-  iron: rgba(232, 232, 233, 1), // Border color
-  athens-gray: rgba(237, 237, 238, 1),
-  athens-gray-light: rgba(247, 247, 250, 1),
-  azure-radiance: rgba(0, 143, 255, 1),
-  allports: rgba(0, 128, 15, 1),
-  cerulean: rgba(0, 170, 204,1),
-  hibiscus: rgba(204, 51, 114, 1),
-  wild-strawberry: rgba(254, 66, 144, 1)
+  primary-dark: rgba(44, 49, 71, 1),
+  primary: rgba(55, 61, 89, 1),
+  primary-light: rgba(71, 76, 95, 1),
+  secondary: rgba(255, 76, 121, 1),
+
+  gray: rgba(80, 86, 119, 1),
+  medium-gray: rgba(137, 140, 153, 1),
+  light-gray: rgba(232, 232, 233, 1), // Border color
+  super-light-gray: rgba(237, 237, 238, 1),
+  extra-light-gray: rgba(247, 247, 250, 1),
+  
+  success: rgba(61, 204, 109, 1),
+  warn: rgba(255, 212, 0, 1),
+  danger: rgba(255, 0, 81, 1),
+  accent: rgba(254, 66, 144, 1),
+
+  google: rgba(254, 66, 97, 1),
+
+  primary-ionic: rgba(72, 138, 255, 1),
+  secondary-ionic: rgba(50, 219, 100, 1),
+  danger-ionic: rgba(245, 61, 61, 1),
 );
 
 

@@ -9,7 +9,7 @@
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-segment color="cerulean" [(ngModel)]="favorites">
+    <ion-segment color="secondary" [(ngModel)]="favorites">
       <ion-segment-button value="running">
         <ion-icon name="ios-play"></ion-icon>
       </ion-segment-button>
@@ -35,7 +35,7 @@
         <span class="tag"> DESIGN </span>
       </h1>
       <h2>
-        <ion-icon color="river-bed" name="md-pin"></ion-icon>
+        <ion-icon color="primary-light" name="md-pin"></ion-icon>
         {{ task.place }}
       </h2>
     </ion-item>
@@ -44,19 +44,19 @@
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <button color="wild-strawberry" ion-button icon-left clear small>
+        <button color="accent" ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
           <div>12 Likes</div>
         </button>
       </ion-col>
       <ion-col>
-        <button color="wild-strawberry" ion-button icon-left clear small>
+        <button color="accent" ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
           <div>{{ task.comments.length }}Comments</div>
         </button>
       </ion-col>
       <ion-col>
-        <button color="wild-strawberry" ion-button icon-left clear small>
+        <button color="accent" ion-button icon-left clear small>
           <ion-icon name="md-attach"></ion-icon>
           <div>Attached</div>
         </button>

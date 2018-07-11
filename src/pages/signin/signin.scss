@@ -1,20 +1,23 @@
 signin {
-    .wrapper {
-        padding: 2rem 0 0 3.5rem;
-        color: color($colors, athens-gray-light);
-    }
-    .tasknote.header-md {
-        font-weight: lighter;
-        background-color: color($colors, oxford-blue);
-        background-image: url("../assets/imgs/logo.png");
+    .logo-small {
+        margin-left: 10px;
+        min-height: 25px;
+        filter: invert(100%);
+        background-image: url("../assets/imgs/ts-logo-small.svg");
         background-repeat: no-repeat;
         background-size: contain;
     }
-    .toolbar-background-md {
-        background-color: rgba($color:white, $alpha: 0.0)
-    }
-    .info {
-        // margin: 6.0vh 2.0vw 0 0;
-        float: right;
+    .row {
+        .text.left {
+            float: left;
+            font-size: 1rem;
+            padding-left: 15px
+        }
+        .text.right {
+            float: right;
+            font-size: 1rem;
+            padding-right: 15px;
+            color: color($colors, medium-gray);
+        }
     }
 }

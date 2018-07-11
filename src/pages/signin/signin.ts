@@ -9,12 +9,12 @@ import { User } from '../../common/interfaces';
 import { Tasknote } from './../tasknote/tasknote';
 
 @Component({
-  selector: 'singin',
+  selector: 'signin',
   templateUrl: 'signin.html'
 })
 export class Signin {
   constructor(public navCtrl: NavController, public platform: Platform, public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus, public sharedService: SharedService) {
-    this.signIn();
+
   }
 
   signIn() {
