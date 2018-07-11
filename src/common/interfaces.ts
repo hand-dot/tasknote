@@ -4,8 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database';
 import { Weekday, Status, Schedule as ScheduleEnum } from './constants';
 
-export interface User extends firebase.User {
-
+export interface User {
+    displayName?: string;
+    email?: string;
+    phoneNumber?: string;
+    photoURL?: string;
+    providerId?: string;
+    uid?: string;
+    statusMessage?: string;
 }
 
 export interface Friends {

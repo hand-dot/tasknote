@@ -3,6 +3,15 @@
 </ion-header>
 
 <ion-content>
-  <!-- Icons left of text -->
-
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-start>
+        <!-- {{ (sharedService.user | async)?.photoURL }} -->
+        <img src="{{ sharedService.user.photoURL }}">
+      </ion-avatar>
+      <h2>{{ sharedService.user.displayName }}</h2>
+      <h3>Don't Know What To Do!</h3>
+      <p>I've had a pretty messed up day. If we just...</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

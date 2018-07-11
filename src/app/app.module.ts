@@ -10,9 +10,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { IonicStorageModule } from '@ionic/storage';
 import { firebaseConfig } from './conf';
 
 import { MyApp } from './app.component';
+import { Signin } from '../pages/signin/signin';
 import { Tasknote } from '../pages/tasknote/tasknote';
 import { Profile } from '../components/profile/profile';
 import { Tasks } from '../components/tasks/tasks';
@@ -22,6 +24,7 @@ import { SharedService } from '../services/sharedservice';
 @NgModule({
   declarations: [
     MyApp,
+    Signin,
     Tasknote,
     Profile,
     Tasks,
@@ -33,11 +36,13 @@ import { SharedService } from '../services/sharedservice';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    Signin,
     Tasknote,
     Profile,
     Tasks,
