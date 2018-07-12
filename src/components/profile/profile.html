@@ -7,9 +7,9 @@
     <ion-item>
       <ion-avatar item-start>
         <!-- {{ (sharedService.user | async)?.photoURL }} -->
-        <img src="{{ sharedService.user.photoURL }}">
+        <img src="{{ (sharedService.user | async)?.photoURL }}">
       </ion-avatar>
-      <h2>{{ sharedService.user.displayName }}</h2>
+      <h2>{{ (sharedService.user | async)?.photoURL }}</h2>
       <h3>Don't Know What To Do!</h3>
       <p>I've had a pretty messed up day. If we just...</p>
     </ion-item>

@@ -5,13 +5,18 @@ import { AngularFireList } from 'angularfire2/database';
 import { Weekday, Status, Schedule as ScheduleEnum } from './constants';
 
 export interface User {
-    displayName?: string;
+    id?: string;
+    uid: string;
+    providerId?: string;
+    familyName?: string;
+    givenName?: string;
     email?: string;
     phoneNumber?: string;
-    photoURL?: string;
-    providerId?: string;
-    uid?: string;
+    displayName?: string;
     statusMessage?: string;
+    photoURL?: string;
+    locale?: string;
+    isNewUser?: boolean;
 }
 
 export interface Friends {

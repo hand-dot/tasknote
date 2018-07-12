@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { User, Task } from '../common/interfaces';
 import { map } from 'rxjs-compat/operators/map';
@@ -7,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class SharedService {
-    user: User;
+    user: Observable<User>;
     tasks: Observable<Task[]>;
     userCollection: AngularFirestoreCollection<String>;
 
@@ -16,17 +15,33 @@ export class SharedService {
         //   this.sharedService.userCollection.doc(user.uid).collection('profile')
     }
 
-    initializeUser(user: User) {
-        this.user = user;
-        this.tasks = this.userCollection
-            .doc(user.uid)
-            .collection('tasks')
-            .snapshotChanges()
-            .pipe(map(actions => actions.map(a => {
-                const data = a.payload.doc.data() as Task;
-                const id = a.payload.doc.id;
-                return { id, ...data };
-            })));
+    initializeUser({ user, isNewUser = false }: { user: User, isNewUser: boolean }) {
+        const promise: Promise<void> = isNewUser
+            ? this.userCollection
+                .doc(user.uid)
+                .collection('user')
+                .doc(user.uid)
+                .set(user)
+            : Promise.resolve();
+
+        promise.then(() => {
+            this.user = this.userCollection
+                .doc(user.uid)
+                .collection('user')
+                .doc(user.uid)
+                .valueChanges()
+                .pipe(map(actions => actions as User));
+
+            this.tasks = this.userCollection
+                .doc(user.uid)
+                .collection('tasks')
+                .snapshotChanges()
+                .pipe(map(actions => actions.map(a => {
+                    const data = a.payload.doc.data() as Task;
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                })));
+        });
     }
 
     addTask(task: Task) {

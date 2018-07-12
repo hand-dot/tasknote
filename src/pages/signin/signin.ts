@@ -1,11 +1,9 @@
-
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { SharedService } from './../../services/sharedservice';
 import firebase from 'firebase';
-import { User } from '../../common/interfaces';
 import { Tasknote } from './../tasknote/tasknote';
 
 @Component({
@@ -18,16 +16,16 @@ export class Signin {
   }
 
   signIn() {
-    const googleLogin: Promise<User> = this.platform.is('cordova')
+    const googleLogin: Promise<any> = this.platform.is('cordova')
       ? this.nativeGoogleLogin()
       : this.webGoogleLogin();
 
     googleLogin
-      .then(user => { this.sharedService.initializeUser(user); this.navCtrl.setRoot(Tasknote); })
+      .then(userCredential => { this.sharedService.initializeUser(userCredential); this.navCtrl.setRoot(Tasknote); })
       .catch(error => { console.error('Signin error', error); })
   }
 
-  nativeGoogleLogin(): Promise<User> {
+  nativeGoogleLogin(): Promise<any> {
     return this.googlePlus.login({
       'webClientId': '1081683815336-s9cv3d5lildk2ubap2vpn0gcr4tur38c.apps.googleusercontent.com',
       'offline': true
@@ -35,8 +33,22 @@ export class Signin {
       .then(result => this.angularFireAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(result.idToken)))
   }
 
-  webGoogleLogin(): Promise<User> {
+  webGoogleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.angularFireAuth.auth.signInWithPopup(provider).then(userCredential => ({ ...userCredential.user }));
+    return this.angularFireAuth.auth.signInWithPopup(provider).then(userCredential => ({
+      user: {
+        id: (userCredential.additionalUserInfo.profile as any).id || '',
+        uid: userCredential.user.uid,
+        providerId: userCredential.additionalUserInfo.providerId || '',
+        familyName: (userCredential.additionalUserInfo.profile as any).family_name || '',
+        givenName: (userCredential.additionalUserInfo.profile as any).given_name || '',
+        email: userCredential.user.email || '',
+        phoneNumber: userCredential.user.phoneNumber || '',
+        displayName: userCredential.user.displayName || '',
+        photoURL: userCredential.user.photoURL || '',
+        locale: (userCredential.additionalUserInfo.profile as any).locale || '',
+      },
+      isNewUser: userCredential.additionalUserInfo.isNewUser
+    }));
   }
 }
