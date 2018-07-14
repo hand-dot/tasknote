@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,23 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+// change header color
+// .toolbar-background-md {
+//     background-color: rgba($color:white, $alpha: 0.0)
+//     font-weight: lighter;
+// }
+.container .row {}
+
+.right {
+    float: right;
+}
+
+.logo-small {
+    min-height: 30px;
+    width: 30px;
+    display: inline-block;
+    filter: invert(100%);
+    background-image: url("../assets/imgs/ts-logo-small.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}

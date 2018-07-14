@@ -4,7 +4,7 @@ tasks {
         // background-color: color($colors, athens-gray-light);
     }
     .toolbar-background-md {
-        background-color: rgba($color:white, $alpha: 0.0)
+        background-color: color($colors, extra-light-gray-v2);
     }
     .card.card-md {
         margin-top: 20px;
@@ -20,7 +20,7 @@ tasks {
             h1 {
                 font-size: 2.6rem;
                 font-weight: bolder;
-                color: color($colors, accent);
+                color: color($colors, gray);
             }
             h2 {
                 font-weight: lighter;
@@ -38,11 +38,6 @@ tasks {
             font-size: 1.2rem;
             font-weight: bold;
             color: color($colors, light-gray);
-        }
-        .progress {
-            background-color: color($colors, accent);
-            width: 90%;
-            height: 2px;
         }
     }
 }

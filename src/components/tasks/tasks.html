@@ -9,7 +9,7 @@
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-segment color="secondary" [(ngModel)]="favorites">
+    <ion-segment color="azure" [(ngModel)]="favorites">
       <ion-segment-button value="running">
         <ion-icon name="ios-play"></ion-icon>
       </ion-segment-button>
@@ -44,19 +44,19 @@
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <button color="accent" ion-button icon-left clear small>
+        <button color="azure" ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
           <div>12 Likes</div>
         </button>
       </ion-col>
       <ion-col>
-        <button color="accent" ion-button icon-left clear small>
+        <button color="azure" ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
           <div>{{ task.comments.length }}Comments</div>
         </button>
       </ion-col>
       <ion-col>
-        <button color="accent" ion-button icon-left clear small>
+        <button color="azure" ion-button icon-left clear small>
           <ion-icon name="md-attach"></ion-icon>
           <div>Attached</div>
         </button>
@@ -67,8 +67,6 @@
         </ion-note>
       </ion-col>
     </ion-row>
-    <div class="progress">
-    </div>
   </ion-card>
 
 </ion-content>

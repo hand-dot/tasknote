@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Events } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { User, Task } from '../common/interfaces';
 import { map } from 'rxjs-compat/operators/map';
@@ -10,7 +9,7 @@ import { Status, Weekday } from '../common/constants';
 export class SharedService {
     user: User;
 
-    constructor(private angularFirestore: AngularFirestore, public events: Events) {
+    constructor(private angularFirestore: AngularFirestore) {
     }
 
     initializeUser({ user, isNewUser = false }: { user: User, isNewUser: boolean }): Promise<void> {

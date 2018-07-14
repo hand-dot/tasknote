@@ -1,20 +1,22 @@
-<ion-header no-border class="header">
+<ion-header no-border>
   <ion-navbar>
     <ion-title></ion-title>
-    <div class="container">
-      <button ion-button icon-only round color="primary">
-        <ion-icon name="md-add"></ion-icon>
+    <div class="logo-small"></div>
+    <div class="right">
+      <button ion-button icon-only round clear>
+        <ion-icon name="md-add" style="color:rgba(145,145,145,0.9);"></ion-icon>
       </button>
-      <button ion-button icon-only round color="primary">
-        <ion-icon name="md-search"></ion-icon>
+      <button ion-button icon-only round clear>
+        <ion-icon name="md-search" style="color:rgba(145,145,145,0.9);"></ion-icon>
       </button>
     </div>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+// padding to avoid overlapping
+<ion-content padding>
   <!-- Icons left of text -->
-  <ion-tabs tabs-only tabsPlacement="top" tabsLayout="icon-start" color="primary">
+  <ion-tabs tabs-only tabsPlacement="top" tabsLayout="icon-start" color="extra-light-gray-v2">
     <ion-tab tabTitle="Profile" tabIcon="md-person" [root]="profile"></ion-tab>
     <ion-tab tabTitle="Tasks" tabIcon="logo-buffer" [root]="tasks" tabBadge="1" tabBadgeStyle="danger"></ion-tab>
     <ion-tab tabTitle="Messages" tabIcon="ios-text" [root]="settings"></ion-tab>
