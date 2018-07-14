@@ -23,8 +23,11 @@ export class MyApp {
       this.initializeApp();
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          sharedService.initializeUser({ user, isNewUser: false });
-          this.nav.setRoot(Tasknote);
+          sharedService
+            .initializeUser({ user, isNewUser: false })
+            .then(() => {
+              this.nav.setRoot(Tasknote);
+            });
         } else {
           this.nav.setRoot(Signin)
         }

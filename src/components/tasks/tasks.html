@@ -26,10 +26,10 @@
   </ion-toolbar>
 
   <!-- Cards -->
-  <ion-card *ngFor="let task of sharedService.tasks | async">
+  <ion-card *ngFor="let task of tasks | async">
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{ (sharedService.user | async)?.photoURL }}" />
+        <img src="{{ (user | async)?.photoURL }}" />
       </ion-avatar>
       <h1> {{ task.title }}
         <span class="tag"> DESIGN </span>

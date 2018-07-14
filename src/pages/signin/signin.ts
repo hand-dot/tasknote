@@ -21,7 +21,8 @@ export class Signin {
       : this.webGoogleLogin();
 
     googleLogin
-      .then(userCredential => { this.sharedService.initializeUser(userCredential); this.navCtrl.setRoot(Tasknote); })
+      .then(userCredential => this.sharedService.initializeUser(userCredential))
+      .then(_ => this.navCtrl.setRoot(Tasknote))
       .catch(error => { console.error('Signin error', error); })
   }
 

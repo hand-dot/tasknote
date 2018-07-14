@@ -15,7 +15,7 @@ export class Tasknote {
   tasks: any = Tasks;
   settings: any = Settings;
 
-  constructor(public navCtrl: NavController, private sharedService: SharedService) {
+  constructor(public navCtrl: NavController) {
 
   }
 }
