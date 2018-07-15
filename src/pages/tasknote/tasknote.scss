@@ -1,1 +1,7 @@
-tasknote {}
+tasknote {
+    .tabs-md-extra-light-gray-v2,
+    .tabs-md-extra-light-gray-v2 .tab-button[aria-selected=true],
+    .tabs-md-extra-light-gray-v2 .tab-button[aria-selected=true] .tab-button-icon {
+        color: color($colors, azure);
+    }
+}

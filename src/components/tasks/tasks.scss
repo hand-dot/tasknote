@@ -6,6 +6,9 @@ tasks {
     .toolbar-background-md {
         background-color: color($colors, extra-light-gray-v2);
     }
+    .segment-md-azure .segment-button {
+        color: color($colors, light-gray);
+    }
     .card.card-md {
         margin-top: 20px;
         .item.item-block.item-md,

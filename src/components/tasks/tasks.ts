@@ -13,6 +13,7 @@ import { User, Task } from '../../common/interfaces';
 export class Tasks {
   user: Observable<User>;
   tasks: Observable<Task[]>;
+  favorites: any;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, public events: Events, private sharedService: SharedService) {
     this.user = sharedService.userToObservable();
