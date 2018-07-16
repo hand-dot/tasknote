@@ -32,3 +32,43 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+.circle {
+    height: 3vw;
+    width: 3vw;
+    background: radial-gradient(circle, color($colors, azure), color($colors, white) 95%);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1,
+h2,
+h3,
+p {
+    padding: 2px;
+    color: color($colors, gray);
+    background-color: inherit;
+}
+
+h1 {
+    font-size: 2.6rem;
+    font-weight: bolder;
+    color: color($colors, gray);
+}
+
+h2 {
+    font-weight: lighter;
+    color: color($colors, gray);
+}
+
+h3 {
+    font-weight: lighter !important;
+    color: color($colors, light-gray);
+}
+
+p {
+    font-size: 1.8rem;
+    font-weight: lighter;
+}

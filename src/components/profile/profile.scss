@@ -1,5 +1,13 @@
 profile {
-    .toolbar-background-md {
-        background-color: rgba($color:white, $alpha: 0.0)
+    .left-margin.icon.icon-md {
+        margin-right: 12px;
+        vertical-align: middle;
+        color: color($colors, light-gray);
+    }
+    .item.item-md.list-header.list-header-md {
+        margin-top: 10px;
+    }
+    .col-padding {
+        padding-top: 10px;
     }
 }

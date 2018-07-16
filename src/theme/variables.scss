@@ -39,7 +39,8 @@ $colors: (
   primary-light: rgba(71, 76, 95, 1),
   secondary: rgba(255, 76, 121, 1),
 
-  azure: rgba(0, 160, 250,1),
+  azure: rgba(0, 160, 250, 1),
+  orange: rgb(255, 154, 65),
 
   gray: rgba(90, 90, 90, 1),
   medium-gray: rgba(145, 145, 145, 1),
@@ -52,8 +53,9 @@ $colors: (
   warn: rgba(255, 212, 0, 1),
   danger: rgba(255, 0, 81, 1),
   accent: rgba(254, 66, 144, 1),
+  accent-v2: rgba(244, 54, 76, 1),
 
-  google: rgba(254, 66, 97, 1), //  rgb(244, 54, 76)
+  google: rgba(254, 66, 97, 1),
 
   primary-ionic: rgba(72, 138, 255, 1),
   secondary-ionic: rgba(50, 219, 100, 1),
