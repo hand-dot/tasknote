@@ -4,4 +4,8 @@ tasknote {
     .tabs-md-extra-light-gray-v2 .tab-button[aria-selected=true] .tab-button-icon {
         color: color($colors, azure);
     }
+    .scroll-content {
+        // ion-content no pagging
+        padding: 0px !important;
+    }
 }
