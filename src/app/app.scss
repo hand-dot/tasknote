@@ -17,10 +17,70 @@
 //     background-color: rgba($color:white, $alpha: 0.0)
 //     font-weight: lighter;
 // }
-.container .row {}
 
-.right {
-    float: right;
+h1,
+h2,
+h3,
+p {
+    padding: 0.2rem;
+    color: color($colors, gray);
+    background-color: inherit;
+}
+
+.nav-primary {}
+.nav-primary__list {}
+.nav-primary__item {}
+.nav-primary__link {}
+.nav-primary__link--is-active {}
+
+.container.text,
+.text {
+    padding: 0.5rem;
+    .title {}
+    .text {}
+
+    &.large { font-size: 1.5rem; }
+    &.small { font-size: 0.8rem; padding: 0.2rem 0.2rem; }
+    &.azure {
+        color: color($colors, azure)
+    }
+}
+
+
+.textbox {
+
+    &:focus { outline: none; border: 1px solid #69e; }  
+    &.large { font-size: 18px; }
+    &.small { font-size: 11px; padding: 1px 2px; }
+}
+
+.is-hidden    { display:    none !important; }
+.is-invisible { visibility: none !important; }
+
+.block        { display: block        !important; }
+.inline       { display: inline       !important; }
+.inline-block { display: inline-block !important; }
+
+.left  { float: left  !important; }
+.right { float: right !important; }
+
+.text-left   { text-align: left   !important; }
+.text-center { text-align: center !important; }
+.text-right  { text-align: right  !important; }
+
+/**
+ * Below the logo CSS
+ *
+ */
+
+.alert {
+    height: 3vw;
+    width: 3vw;
+    border: 3px solid color($colors, azure); // background: radial-gradient(circle, color($colors, azure), color($colors, white) 95%);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo-small {
@@ -31,44 +91,4 @@
     background-image: url("../assets/imgs/ts-logo-small.svg");
     background-repeat: no-repeat;
     background-size: contain;
-}
-
-.circle {
-    height: 3vw;
-    width: 3vw;
-    background: radial-gradient(circle, color($colors, azure), color($colors, white) 95%);
-    border-radius: 50%;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-h1,
-h2,
-h3,
-p {
-    padding: 2px;
-    color: color($colors, gray);
-    background-color: inherit;
-}
-
-h1 {
-    font-size: 2.6rem;
-    font-weight: bolder;
-    color: color($colors, gray);
-}
-
-h2 {
-    font-weight: lighter;
-    color: color($colors, gray);
-}
-
-h3 {
-    font-weight: lighter !important;
-    color: color($colors, light-gray);
-}
-
-p {
-    font-size: 1.8rem;
-    font-weight: lighter;
 }
