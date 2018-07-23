@@ -32,23 +32,23 @@
   </ion-list>
 
 
-
+  <!-- <ion-item-divider color="white">
+  </ion-item-divider> -->
 
   <!-- Sliding item 1 -->
   <ion-list>
     <ion-list-header>
-      <h3>Projects</h3>
-      <button ion-button icon-only clear round item-end color="light-gray">
+      <span class="text large light"> All projects</span>
+      <button ion-button icon-only clear item-end color="gray">
         <ion-icon name="ios-more"></ion-icon>
       </button>
     </ion-list-header>
-
-    <ion-item-divider color="white" no-lines>
+    <div>
       <button ion-button icon-only clear color="azure">
         <ion-icon name="add"></ion-icon>
-        <span class="text azure">Create project</span>
+        Add project
       </button>
-    </ion-item-divider>
+    </div>
     <!-- <ion-grid>
       <ion-row>
         <ion-col class="col-padding" col-9 push-3>
@@ -64,18 +64,15 @@
 
     <ion-item-sliding>
       <ion-item>
-        <h2>Proejct Title</h2>
-        <p>
-          <span>
-            <ion-icon class="left-margin" name="md-link"></ion-icon>
-          </span>
-          <span>
-            <ion-icon class="left-margin" name="md-text"></ion-icon>
-          </span>
-          <span>
-            <ion-icon class="left-margin" name="md-sync"></ion-icon>
-          </span>
-        </p>
+        <div class="text">Web UI・UX Integration System</div>
+        <div>
+          <ion-avatar class="profile small inline-block ">
+            <img src="{{ (user | async)?.photoURL }}">
+          </ion-avatar>
+          <ion-avatar class="profile small inline-block">
+            <img src="{{ (user | async)?.photoURL }}">
+          </ion-avatar>
+        </div>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="primary">
@@ -98,18 +95,15 @@
     <!-- Sliding item 2 -->
     <ion-item-sliding>
       <ion-item>
-        <h2>Project title 2</h2>
-        <p>
-          <span>
-            <ion-icon class="left-margin" name="md-link"></ion-icon>
-          </span>
-          <span>
-            <ion-icon class="left-margin" name="md-text"></ion-icon>
-          </span>
-          <span>
-            <ion-icon class="left-margin" name="md-sync"></ion-icon>
-          </span>
-        </p>
+        <div class="text">Web UI・UX Integration System</div>
+        <div>
+          <ion-avatar class="profile small inline-block ">
+            <img src="{{ (user | async)?.photoURL }}">
+          </ion-avatar>
+          <ion-avatar class="profile small inline-block">
+            <img src="{{ (user | async)?.photoURL }}">
+          </ion-avatar>
+        </div>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="primary">
@@ -132,18 +126,15 @@
     <!-- Sliding item 3 -->
     <ion-item-sliding>
       <ion-item>
-        <h2>Project title 3</h2>
-        <p>
-          <span>
-            <ion-icon class="left-margin" name="md-link"></ion-icon>
-          </span>
-          <span>
-            <ion-icon class="left-margin" name="md-text"></ion-icon>
-          </span>
-          <span>
-            <ion-icon class="left-margin" name="md-sync"></ion-icon>
-          </span>
-        </p>
+        <div class="text">Web UI・UX Integration System</div>
+        <div>
+          <ion-avatar class="profile small inline-block ">
+            <img src="{{ (user | async)?.photoURL }}">
+          </ion-avatar>
+          <ion-avatar class="profile small inline-block">
+            <img src="{{ (user | async)?.photoURL }}">
+          </ion-avatar>
+        </div>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="primary">

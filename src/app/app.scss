@@ -22,7 +22,7 @@ h1,
 h2,
 h3,
 p {
-    padding: 0.2rem;
+    padding: 0.15rem;
     color: color($colors, gray);
     background-color: inherit;
 }
@@ -36,15 +36,20 @@ p {
 .container.text,
 .text {
     padding: 0.5rem;
-    .title {}
-    .text {}
-
-    &.large { font-size: 1.5rem; }
-    &.small { font-size: 0.8rem; padding: 0.2rem 0.2rem; }
+    color: color($colors, gray);
+    &.center { text-align: center; }
+    &.large { font-size: 1.7rem; }
+    &.small { font-size:1.5rem; padding: 0.2rem 0.2rem; color: color($colors, light-gray); }
+    &.bold {
+        font-weight: 300;
+    }    
+    &.light {
+        font-weight: 100;
+    }    
     &.azure {
         color: color($colors, azure)
-    }
-}
+    }    
+}    
 
 
 .textbox {

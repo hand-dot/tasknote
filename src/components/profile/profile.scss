@@ -1,13 +1,21 @@
 profile {
-    .left-margin.icon.icon-md {
-        margin-right: 12px;
-        vertical-align: middle;
-        color: color($colors, light-gray);
-    }
     .item.item-md.list-header.list-header-md {
         margin-top: 10px;
     }
     .col-padding {
         padding-top: 10px;
+    }
+    .profile {
+        &.small {
+            margin-left: 5px;
+            width: 25px !important;
+            height: 25px !important;
+            min-width: 25px !important;
+            min-height: 25px !important;
+            img {
+                width: 25px !important;
+                height: 25px !important;
+            }
+        }
     }
 }
