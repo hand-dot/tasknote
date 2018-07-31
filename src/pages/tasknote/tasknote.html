@@ -19,11 +19,11 @@
 // padding to avoid overlapping header
 <ion-content padding>
   <!-- Icons left of text -->
-  <ion-tabs tabs-only tabsPlacement="top" tabsLayout="icon-start" color="extra-light-gray-v2">
-    <ion-tab tabIcon="md-person" [root]="profile"></ion-tab>
-    <ion-tab tabIcon="logo-buffer" [root]="tasks"></ion-tab>
-    <ion-tab tabIcon="ios-text" [root]="settings"></ion-tab>
-    <ion-tab tabIcon="ios-list" [root]="settings"></ion-tab>
-    <ion-tab tabIcon="settings" [root]="settings"></ion-tab>
-  </ion-tabs>
+  <super-tabs tabs-only color="extra-light-gray-v2">
+    <super-tab icon="md-person" [root]="profile"></super-tab>
+    <super-tab icon="logo-buffer" [root]="tasks"></super-tab>
+    <super-tab icon="ios-text" [root]="settings"></super-tab>
+    <super-tab icon="ios-list" [root]="settings"></super-tab>
+    <super-tab icon="settings" [root]="settings"></super-tab>
+  </super-tabs>
 </ion-content>

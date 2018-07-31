@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HeaderColor } from '@ionic-native/header-color';
 
 import { GooglePlus } from '@ionic-native/google-plus';
+import { SuperTabsModule } from 'ionic2-super-tabs';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth'
@@ -37,6 +38,7 @@ import { SharedService } from '../services/sharedservice';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
+    SuperTabsModule.forRoot(),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

@@ -1,11 +1,6 @@
 tasknote {
-    .tabs-md-extra-light-gray-v2,
-    .tabs-md-extra-light-gray-v2 .tab-button[aria-selected=true],
-    .tabs-md-extra-light-gray-v2 .tab-button[aria-selected=true] .tab-button-icon {
-        color: color($colors, azure);
-    }
     .scroll-content {
         // ion-content no pagging
-        padding: 15px 0px 0px 0px !important;
+        padding: 0 !important;
     }
 }

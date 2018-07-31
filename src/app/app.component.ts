@@ -9,7 +9,6 @@ import firebase from 'firebase';
 
 import { Tasknote } from '../pages/tasknote/tasknote';
 import { Signin } from './../pages/signin/signin';
-import { share } from '../../node_modules/rxjs/operators';
 
 @Component({
   templateUrl: 'app.html'
