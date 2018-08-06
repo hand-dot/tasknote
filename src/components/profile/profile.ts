@@ -12,6 +12,6 @@ import { User } from '../../common/interfaces';
 export class Profile {
   user: Observable<User>;
   constructor(public navCtrl: NavController, public events: Events, private sharedService: SharedService) {
-    this.user = sharedService.userToObservable();
+    this.user = sharedService.userObservable();
   }
 }

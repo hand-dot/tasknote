@@ -1,7 +1,4 @@
 import { Task } from './interfaces';
-import firebase from 'firebase';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireList } from 'angularfire2/database';
 import { Weekday, Status, Schedule as ScheduleEnum } from './constants';
 
 export interface User {
@@ -16,22 +13,25 @@ export interface User {
     statusMessage?: string;
     photoURL?: string;
     locale?: string;
-    isNewUser?: boolean;
 }
 
-export interface Friends {
+export interface ProjectDetails {
+    projectIds? : Array<String>;
+    userIds?: Array<String>;
+}
 
+export interface Project {
+    createdAt?: Date;
 }
 
 export interface Task {
-    taskId: string;
-    uid: string;
+    userId: string;
     title: string;
     content: string;
+    tag: string;
     place: string;
     status: Status;
     schedule: Schedule;
-    likes?: Array<Like>;
     comments?: Array<Comment>;
     createdAt: Date;
 }
@@ -42,15 +42,10 @@ export interface Schedule {
     interval: number
 }
 
-export interface Like {
-    uid: string;
-    likeId: string;
-}
-
 export interface Comment {
-    uid: string;
-    commentId: string;
+    userId: string;
     comment: string;
+    createdAt: Date;
 }
 
 

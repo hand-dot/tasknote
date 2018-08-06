@@ -1,7 +1,9 @@
+import { ProjectDetails } from './../common/interfaces';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { User, Task } from '../common/interfaces';
+import { User, Project, Task, ProjectDetails } from '../common/interfaces';
 import { map } from 'rxjs-compat/operators/map';
+import { Observable as ObservableCompat } from 'rxjs-compat';
 import { Observable } from 'rxjs';
 import { Status, Weekday } from '../common/constants';
 
@@ -12,33 +14,52 @@ export class SharedService {
     constructor(private angularFirestore: AngularFirestore) {
     }
 
-    initializeUser({ user, isNewUser = false }: { user: User, isNewUser: boolean }): Promise<void> {
+    initUser({ user, isNewUser = false }: { user: User, isNewUser: boolean }): Promise<void> {
         this.user = user;
         return isNewUser
-            ? this.angularFirestore
-                .collection('users')
-                .doc(user.uid)
-                .collection('user')
-                .doc(user.uid)
-                .set(user)
+            ? this.createUser()
             : Promise.resolve();
     }
 
-    userToObservable(): Observable<User> {
+    private createUser(): Promise<any> {
         return this.angularFirestore
-            .collection('users')
+            .collection('Users')
             .doc(this.user.uid)
-            .collection('user')
+            .set(this.user)
+            .then(_ => {
+                this.angularFirestore
+                    .collection('ProjectDetails')
+                    .doc('ByUser')
+                    .collection('Users')
+                    .doc(this.user.uid)
+                    .set({ projectIds: [] });
+            });
+    }
+
+    public userObservable(): Observable<User> {
+        return this.angularFirestore
+            .collection('Users')
             .doc(this.user.uid)
             .valueChanges()
             .pipe(map(actions => actions as User));
+
     }
 
-    tasksToObservable(): Observable<Task[]> {
+    public projectDetailsObservable(): Observable<ProjectDetails> {
         return this.angularFirestore
-            .collection('users')
+            .collection('ProjectDetails')
+            .doc('ByUser')
+            .collection('Users')
             .doc(this.user.uid)
-            .collection('tasks')
+            .valueChanges()
+            .pipe(map(actions => actions as ProjectDetails));
+    }
+
+    public tasksObservable(projectId: string): Observable<Task[]> {
+        return this.angularFirestore
+            .collection('Projects')
+            .doc(projectId)
+            .collection('Tasks')
             .snapshotChanges()
             .pipe(map(actions => actions.map(a => {
                 const data = a.payload.doc.data() as Task;
@@ -47,26 +68,25 @@ export class SharedService {
             })));
     }
 
-
-    addTask(task: Task) {
-        const firestoreId = this.angularFirestore.createId();
+    public createProject(task: Task, projectsByUser: ProjectDetails) {
+        const projectId = this.angularFirestore.createId();
+        const taskId = this.angularFirestore.createId();
         this.angularFirestore
-            .collection('users')
-            .doc(this.user.uid)
-            .collection('tasks')
-            .add({
-                taskId: '0001',
-                uid: this.user.uid,
-                title: 'Final Fantasy',
-                content: 'Listen to my story',
-                place: 'For the Fifteenth',
-                status: Status.Canceled,
-                schedule: { date: new Date(), weekday: Weekday.Friday, interval: 10 },
-                likes: [{ uid: '', likeId: '' }],
-                comments: [{ uid: '', commentId: '', comment: '' }],
-                createdAt: new Date()
-            });
+            .collection('Projects')
+            .doc(projectId)
+            .collection('Tasks')
+            .doc(taskId)
+            .set(task)
+            .then(_ => this.linkProjectToUser(projectId, this.user.uid, projectsByUser));
     }
 
-
+    private linkProjectToUser(projectId: String, userId: string, projectsByUser: ProjectDetails) {
+        console.error([projectId].concat(projectsByUser.projectIds));
+        this.angularFirestore
+            .collection('ProjectDetails')
+            .doc('ByUser')
+            .collection('Users')
+            .doc(userId)
+            .update({ projectIds: [projectId].concat(projectsByUser.projectIds) });
+    }
 }
