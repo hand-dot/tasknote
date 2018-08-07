@@ -10,11 +10,15 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-exports.syncProjectDetails = functions.firestore
-    .document('ProjectDetails/ByUser/Users/{uid}').onWrite((change, context) => {
-        const doc = admin
-            .firestore()
-            .doc(`ProjectDetails/ByProject/Projects/${context.params.uid}/`);
+exports.onUserProjectUpdate = functions.firestore
+    .document('Projects/{projectId}').onWrite((change, context) => {
+        let previousProjecIds = change.before.data().userIds;
+        let currentProjectIds = change.after.data().userIds;
+        // let [headProjectId] = currentProjectIds.filter(projectId => !previousProjecIds.includes(projectId));
 
-        doc.update({});
+        // const doc = admin.firestore().doc(`ProjectDetails/ByProject/Projects/${headProjectId}/`);
+
+        console.error(change.before.data());
+        console.error(change.after.data());
+
     });

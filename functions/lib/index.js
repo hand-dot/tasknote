@@ -11,12 +11,10 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 exports.syncProjectDetails = functions.firestore
     .document('ProjectDetails/ByUser/Users/{uid}').onWrite((change, context) => {
-    console.error(change);
-    console.error(context);
-    const uid = 'something';
-    const collection = admin
+    const doc = admin
         .firestore()
-        .collection(`ProjectDetails/ByProject/Projects/${uid}/`);
-    console.error(collection.get());
+        .doc(`ProjectDetails/ByProject/Projects/${context.params.uid}/`);
+    console.error(change.before.data());
+    console.error(change.after.data());
 });
 //# sourceMappingURL=index.js.map

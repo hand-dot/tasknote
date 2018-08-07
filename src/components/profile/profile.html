@@ -7,10 +7,10 @@
     <ion-item-sliding>
       <ion-item>
         <ion-avatar item-start>
-          <img src="{{ (user | async)?.photoURL }}">
+          <img src="{{ (user | async)?.profile.photoURL }}">
         </ion-avatar>
-        <h2>{{ 'Hello world' || (user | async)?.displayName }}</h2>
-        <h3>{{ (user | async)?.statusMessage || 'Not set' }}</h3>
+        <h2>{{ 'Hello world' || (user | async)?.profile.displayName }}</h2>
+        <h3>{{ (user | async)?.profile.statusMessage || 'Not set' }}</h3>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="primary">
@@ -67,10 +67,10 @@
         <div class="text">Web UI・UX Integration System</div>
         <div>
           <ion-avatar class="profile small inline-block ">
-            <img src="{{ (user | async)?.photoURL }}">
+            <img src="{{ (user | async)?.profile.photoURL }}">
           </ion-avatar>
           <ion-avatar class="profile small inline-block">
-            <img src="{{ (user | async)?.photoURL }}">
+            <img src="{{ (user | async)?.profile.photoURL }}">
           </ion-avatar>
         </div>
       </ion-item>
@@ -98,10 +98,10 @@
         <div class="text">Web UI・UX Integration System</div>
         <div>
           <ion-avatar class="profile small inline-block ">
-            <img src="{{ (user | async)?.photoURL }}">
+            <img src="{{ (user | async)?.profile.photoURL }}">
           </ion-avatar>
           <ion-avatar class="profile small inline-block">
-            <img src="{{ (user | async)?.photoURL }}">
+            <img src="{{ (user | async)?.profile.photoURL }}">
           </ion-avatar>
         </div>
       </ion-item>
@@ -129,10 +129,10 @@
         <div class="text">Web UI・UX Integration System</div>
         <div>
           <ion-avatar class="profile small inline-block ">
-            <img src="{{ (user | async)?.photoURL }}">
+            <img src="{{ (user | async)?.profile.photoURL }}">
           </ion-avatar>
           <ion-avatar class="profile small inline-block">
-            <img src="{{ (user | async)?.photoURL }}">
+            <img src="{{ (user | async)?.profile.photoURL }}">
           </ion-avatar>
         </div>
       </ion-item>

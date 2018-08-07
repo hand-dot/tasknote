@@ -11,22 +11,22 @@ export class SharedService {
     constructor(private afs: AngularFirestore) {
     }
 
-    public async initUser({ user, isNewUser = false }: { user: User, isNewUser: boolean }): Promise<void> {
+    public async initUser(user: User): Promise<void> {
         this.user = user;
-        if (isNewUser) return this.createUser();
+        if (this.user.isNewUser) return this.createUser();
     }
 
     private async createUser(): Promise<void> {
         const doc = this.afs.doc(`Users/${this.user.profile.uid}`);
-        return doc.set({ profile: this.user, projectIds: [] });
+        return doc.set({ profile: this.user.profile, projectIds: [] });
     }
 
-    public userObservable(): Observable<User> {
+    public getUserObservable(): Observable<User> {
         const doc = this.afs.doc(`Users/${this.user.profile.uid}`);
         return doc.valueChanges().pipe(map(actions => actions as User));
     }
 
-    public tasksObservable(projectId: string): Observable<Task[]> {
+    public getTasksObservable(projectId: string): Observable<Task[]> {
         const collection = this.afs.collection(`Projects/${projectId}/Tasks`);
         return collection.snapshotChanges().pipe(map(actions => actions.map(a => {
             const data = a.payload.doc.data() as Task;
@@ -35,7 +35,7 @@ export class SharedService {
         })));
     }
 
-    public async createProject(project: Project, task: Task, userIds: Array<String>): Promise<void> {
+    public async createProject(project: Project, task: Task): Promise<void> {
         const projectId = this.afs.createId();
         const projectDoc = this.afs.doc(`Projects/${projectId}`);
         const taskDoc = this.afs.doc(`Projects/${projectId}/Tasks/${this.afs.createId()}`);

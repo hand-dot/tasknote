@@ -20,13 +20,10 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public headerColor: HeaderColor, public angularFireAuth: AngularFireAuth, public sharedService: SharedService) {
     platform.ready().then(() => {
       this.initializeApp();
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          sharedService
-            .initUser({ user, isNewUser: false })
-            .then(() => {
-              this.nav.setRoot(Tasknote);
-            });
+      firebase.auth().onAuthStateChanged(async (profile): Promise<void> => {
+        if (profile) {
+          await sharedService.initUser({ profile })
+          this.nav.setRoot(Tasknote);
         } else {
           this.nav.setRoot(Signin)
         }

@@ -1,21 +1,23 @@
 import { Task } from './interfaces';
 import { Weekday, Status, Schedule as ScheduleEnum } from './constants';
 
+export interface Profile {
+    id?: string;
+    uid: string;
+    providerId?: string;
+    familyName?: string;
+    givenName?: string;
+    email?: string;
+    phoneNumber?: string;
+    displayName?: string;
+    statusMessage?: string;
+    photoURL?: string;
+    locale?: string;
+}
 export interface User {
-    profile: {
-        id?: string;
-        uid: string;
-        providerId?: string;
-        familyName?: string;
-        givenName?: string;
-        email?: string;
-        phoneNumber?: string;
-        displayName?: string;
-        statusMessage?: string;
-        photoURL?: string;
-        locale?: string;
-    },
-    projectIds: Array<String>
+    profile: Profile
+    projectIds?: Array<String>
+    isNewUser?: boolean;
 }
 
 export interface Project {
