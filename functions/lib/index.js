@@ -24,19 +24,15 @@ exports.onProjectChange = functions.firestore
     const afterChange = R.propOr([], 'userIds')(change.after.data());
     const newUsers = R.filter(userId => !beforeChange.includes(userId), afterChange);
     const oldUsers = R.filter(userId => !afterChange.includes(userId), beforeChange);
-    const addProject = (userId) => __awaiter(this, void 0, void 0, function* () {
+    const updateProjectIds = R.curry((callback, userId) => __awaiter(this, void 0, void 0, function* () {
         const doc = admin.firestore().doc(`Users/${userId}`);
         const projectIds = R.propOr([], 'projectIds', (yield doc.get()).data());
-        const result = yield doc.update({ projectIds: [context.params.projectId].concat(projectIds) });
-        console.log('A new project has been added', result);
-    });
-    const removeProject = (userId) => __awaiter(this, void 0, void 0, function* () {
-        const doc = admin.firestore().doc(`Users/${userId}`);
-        const projectIds = R.propOr([], 'projectIds', (yield doc.get()).data());
-        const result = yield doc.update({ projectIds: R.difference(projectIds, [context.params.projectId]) });
-        console.log('A project has been removed', result);
-    });
-    R.forEach(addProject, newUsers);
-    R.forEach(removeProject, oldUsers);
+        const result = yield doc.update(callback(projectIds));
+        console.log('A project has been updated', result);
+    }));
+    const addProject = projectIds => ({ projectIds: [context.params.projectId].concat(projectIds) });
+    const removeProject = projectIds => ({ projectIds: R.difference(projectIds, [context.params.projectId]) });
+    R.forEach(updateProjectIds(addProject), newUsers);
+    R.forEach(updateProjectIds(removeProject), oldUsers);
 });
 //# sourceMappingURL=index.js.map
