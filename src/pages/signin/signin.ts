@@ -5,6 +5,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { SharedService } from './../../services/sharedservice';
 import firebase from 'firebase';
 import { Tasknote } from './../tasknote/tasknote';
+import { User } from '../../common/interfaces';
 
 @Component({
   selector: 'signin',
@@ -15,18 +16,16 @@ export class Signin {
 
   }
 
-  signIn() {
-    const googleLogin: Promise<any> = this.platform.is('cordova')
-      ? this.nativeGoogleLogin()
-      : this.webGoogleLogin();
+  public async signIn() {
+    const data: any = this.platform.is('cordova')
+      ? await this.nativeGoogleLogin()
+      : await this.webGoogleLogin();
 
-    googleLogin
-      .then(userCredential => this.sharedService.initUser(userCredential))
-      .then(_ => this.navCtrl.setRoot(Tasknote))
-      .catch(error => { console.error('Signin error', error); })
+    await this.sharedService.initUser(data).catch(error => { console.error('Signin error', error); });
+    this.navCtrl.setRoot(Tasknote);
   }
 
-  nativeGoogleLogin(): Promise<any> {
+  async nativeGoogleLogin(): Promise<any> {
     return this.googlePlus.login({
       'webClientId': '1081683815336-s9cv3d5lildk2ubap2vpn0gcr4tur38c.apps.googleusercontent.com',
       'offline': true
@@ -34,22 +33,26 @@ export class Signin {
       .then(result => this.angularFireAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(result.idToken)))
   }
 
-  webGoogleLogin(): Promise<any> {
+  async webGoogleLogin(): Promise<Object> {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.angularFireAuth.auth.signInWithPopup(provider).then(userCredential => ({
+    const userCredential = await this.angularFireAuth.auth.signInWithPopup(provider);
+    return {
       user: {
-        id: (userCredential.additionalUserInfo.profile as any).id || '',
-        uid: userCredential.user.uid,
-        providerId: userCredential.additionalUserInfo.providerId || '',
-        familyName: (userCredential.additionalUserInfo.profile as any).family_name || '',
-        givenName: (userCredential.additionalUserInfo.profile as any).given_name || '',
-        email: userCredential.user.email || '',
-        phoneNumber: userCredential.user.phoneNumber || '',
-        displayName: userCredential.user.displayName || '',
-        photoURL: userCredential.user.photoURL || '',
-        locale: (userCredential.additionalUserInfo.profile as any).locale || '',
+        profile: {
+          id: (userCredential.additionalUserInfo.profile as any).id || '',
+          uid: userCredential.user.uid,
+          providerId: userCredential.additionalUserInfo.providerId || '',
+          familyName: (userCredential.additionalUserInfo.profile as any).family_name || '',
+          givenName: (userCredential.additionalUserInfo.profile as any).given_name || '',
+          email: userCredential.user.email || '',
+          phoneNumber: userCredential.user.phoneNumber || '',
+          displayName: userCredential.user.displayName || '',
+          photoURL: userCredential.user.photoURL || '',
+          locale: (userCredential.additionalUserInfo.profile as any).locale || '',
+        },
+        projectIds: []
       },
       isNewUser: userCredential.additionalUserInfo.isNewUser
-    }));
+    };
   }
 }
