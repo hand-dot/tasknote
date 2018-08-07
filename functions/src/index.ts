@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+const R = require('ramda');
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -10,15 +11,29 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-exports.onUserProjectUpdate = functions.firestore
+
+
+exports.onProjectChange = functions.firestore
     .document('Projects/{projectId}').onWrite((change, context) => {
-        let previousProjecIds = change.before.data().userIds;
-        let currentProjectIds = change.after.data().userIds;
-        // let [headProjectId] = currentProjectIds.filter(projectId => !previousProjecIds.includes(projectId));
+        const beforeChange = R.propOr([], 'userIds')(change.before.data());
+        const afterChange = R.propOr([], 'userIds')(change.after.data());
+        const newUsers = R.filter(userId => !beforeChange.includes(userId), afterChange);
+        const oldUsers = R.filter(userId => !afterChange.includes(userId), beforeChange);
 
-        // const doc = admin.firestore().doc(`ProjectDetails/ByProject/Projects/${headProjectId}/`);
+        const addProject = async userId => {
+            const doc = admin.firestore().doc(`Users/${userId}`);
+            const projectIds = R.propOr([], 'projectIds', (await doc.get()).data());
+            const result = await doc.update({ projectIds: [context.params.projectId].concat(projectIds) });
+            console.log('A new project has been added', result);
+        }
 
-        console.error(change.before.data());
-        console.error(change.after.data());
+        const removeProject = async userId => {
+            const doc = admin.firestore().doc(`Users/${userId}`);
+            const projectIds = R.propOr([], 'projectIds', (await doc.get()).data());
+            const result = await doc.update({ projectIds: R.difference(projectIds, [context.params.projectId]) });
+            console.log('A project has been removed', result);
+        }
 
+        R.forEach(addProject, newUsers);
+        R.forEach(removeProject, oldUsers);
     });

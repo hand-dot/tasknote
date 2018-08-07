@@ -16,12 +16,12 @@ export interface Profile {
 }
 export interface User {
     profile: Profile
-    projectIds?: Array<String>
+    projectIds?: string[]
     isNewUser?: boolean;
 }
 
 export interface Project {
-    userIds: Array<String>;
+    userIds: string[];
     createdAt?: Date;
 }
 
@@ -33,7 +33,7 @@ export interface Task {
     place: string;
     status: Status;
     schedule: Schedule;
-    comments?: Array<Comment>;
+    comments?: Comment[];
     createdAt: Date;
 }
 
