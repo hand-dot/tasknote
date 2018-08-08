@@ -20,19 +20,20 @@ const R = require('ramda');
 admin.initializeApp();
 exports.onProjectChange = functions.firestore
     .document('Projects/{projectId}').onWrite((change, context) => {
-    const beforeChange = R.propOr([], 'userIds')(change.before.data());
-    const afterChange = R.propOr([], 'userIds')(change.after.data());
-    const newUsers = R.filter(userId => !beforeChange.includes(userId), afterChange);
-    const oldUsers = R.filter(userId => !afterChange.includes(userId), beforeChange);
+    const beforeChange = R.propOr({}, 'userIds')(change.before.data());
+    const afterChange = R.propOr({}, 'userIds')(change.after.data());
+    const newUsers = R.omit(R.keys(beforeChange), afterChange);
+    const oldUsers = R.omit(R.keys(afterChange), beforeChange);
+    ;
     const updateProjectIds = R.curry((callback, userId) => __awaiter(this, void 0, void 0, function* () {
         const doc = admin.firestore().doc(`Users/${userId}`);
-        const projectIds = R.propOr([], 'projectIds', (yield doc.get()).data());
+        const projectIds = R.propOr({}, 'projectIds', (yield doc.get()).data());
         const result = yield doc.update(callback(projectIds));
-        console.log('A project has been updated', result);
+        return result;
     }));
-    const addProject = projectIds => ({ projectIds: [context.params.projectId].concat(projectIds) });
-    const removeProject = projectIds => ({ projectIds: R.difference(projectIds, [context.params.projectId]) });
-    R.forEach(updateProjectIds(addProject), newUsers);
-    R.forEach(updateProjectIds(removeProject), oldUsers);
+    const addProject = projectIds => ({ projectIds: R.merge(projectIds, { [context.params.projectId]: true }) });
+    const removeProject = projectIds => ({ projectIds: R.omit([context.params.projectId], projectIds) });
+    const promises = R.concat(R.map(updateProjectIds(addProject), (R.keys(newUsers))), R.map(updateProjectIds(removeProject), (R.keys(oldUsers))));
+    return Promise.all(promises);
 });
 //# sourceMappingURL=index.js.map

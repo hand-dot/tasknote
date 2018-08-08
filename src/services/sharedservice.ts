@@ -3,12 +3,17 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { User, Project, Task } from '../common/interfaces';
 import { map } from 'rxjs-compat/operators/map';
 import { Observable } from 'rxjs';
+import firebase from '../../node_modules/firebase';
 
 @Injectable()
 export class SharedService {
     user: User;
 
     constructor(private afs: AngularFirestore) {
+    }
+
+    public serverTimestamp(): firebase.firestore.FieldValue {
+        return firebase.firestore.FieldValue.serverTimestamp()
     }
 
     public async initUser(user: User): Promise<void> {
@@ -18,7 +23,7 @@ export class SharedService {
 
     private async createUser(): Promise<void> {
         const doc = this.afs.doc(`Users/${this.user.profile.uid}`);
-        return doc.set({ profile: this.user.profile, projectIds: [] });
+        return doc.set({ profile: this.user.profile, projectIds: {} });
     }
 
     public getUserObservable(): Observable<User> {

@@ -26,8 +26,8 @@ export class Tasks {
     this.user = sharedService.getUserObservable();
     sharedService.createProject(
       {
-        userIds: [this.sharedService.user.profile.uid],
-        createdAt: new Date()
+        userIds: { [this.sharedService.user.profile.uid]: true },
+        createdAt: sharedService.serverTimestamp()
       },
       {
         userId: sharedService.user.profile.uid,
@@ -38,7 +38,7 @@ export class Tasks {
         status: Status.Canceled,
         schedule: { date: new Date(), weekday: Weekday.Friday, interval: 10 },
         comments: [{ userId: '', comment: '', createdAt: new Date() }],
-        createdAt: new Date()
+        createdAt: sharedService.serverTimestamp()
       }
     );
   }
