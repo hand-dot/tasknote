@@ -28,8 +28,7 @@ exports.onProjectChange = functions.firestore
     const updateProjectIds = R.curry((callback, userId) => __awaiter(this, void 0, void 0, function* () {
         const doc = admin.firestore().doc(`Users/${userId}`);
         const projectIds = R.propOr({}, 'projectIds', (yield doc.get()).data());
-        const result = yield doc.update(callback(projectIds));
-        return result;
+        return yield doc.update(callback(projectIds));
     }));
     const addProject = projectIds => ({ projectIds: R.merge(projectIds, { [context.params.projectId]: true }) });
     const removeProject = projectIds => ({ projectIds: R.omit([context.params.projectId], projectIds) });

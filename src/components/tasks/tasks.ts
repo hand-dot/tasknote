@@ -26,6 +26,7 @@ export class Tasks {
     this.user = sharedService.getUserObservable();
     sharedService.createProject(
       {
+        projectName: 'Project Title',
         userIds: { [this.sharedService.user.profile.uid]: true },
         createdAt: sharedService.serverTimestamp()
       },

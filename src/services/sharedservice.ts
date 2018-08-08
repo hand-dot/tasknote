@@ -4,6 +4,7 @@ import { User, Project, Task } from '../common/interfaces';
 import { map } from 'rxjs-compat/operators/map';
 import { Observable } from 'rxjs';
 import firebase from '../../node_modules/firebase';
+import R from '../../functions/node_modules/ramda';
 
 @Injectable()
 export class SharedService {
@@ -29,6 +30,13 @@ export class SharedService {
     public getUserObservable(): Observable<User> {
         const doc = this.afs.doc(`Users/${this.user.profile.uid}`);
         return doc.valueChanges().pipe(map(actions => actions as User));
+    }
+
+    public getProjectsObservable(projectIds: string[]): Observable<Project>[] {
+        return projectIds.map(projectId => {
+            const doc = this.afs.doc(`Projects/${projectId}`);
+            return doc.valueChanges().pipe(map(actions => actions as Project));
+        });
     }
 
     public getTasksObservable(projectId: string): Observable<Task[]> {

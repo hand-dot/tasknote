@@ -27,8 +27,8 @@ export interface User {
 }
 
 export interface Project extends Base {
+    projectName: string;
     userIds: {},
-
 }
 
 export interface Task extends Base {
