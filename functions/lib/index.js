@@ -35,13 +35,22 @@ exports.onProjectChange = functions.firestore
     const promises = R.concat(R.map(updateProjectIds(addProject), (R.keys(newUsers))), R.map(updateProjectIds(removeProject), (R.keys(oldUsers))));
     return Promise.all(promises);
 });
+// Get Project User Profiles by projectIds
 exports.getUserProfiles = functions.https.onCall((data, context) => {
-    const userIds = R.propOr([], 'userIds')(data);
-    const mapUserProfiles = (userId) => __awaiter(this, void 0, void 0, function* () {
-        const doc = admin.firestore().doc(`Users/${userId}`);
-        const user = (yield doc.get()).data();
-        return { userProfiles: { uuid: userId, displayName: user.profile.displayName, photoUrl: user.profile.photoURL } };
+    const _projectIds = R.propOr([], 'projectIds')(data);
+    const promise = (projectIds) => __awaiter(this, void 0, void 0, function* () {
+        const getUsers = (projectId) => __awaiter(this, void 0, void 0, function* () {
+            const doc = admin.firestore().doc(`Projects/${projectId}`);
+            return (yield doc.get()).data().userIds;
+        });
+        const userIds = R.mergeAll(yield Promise.all(projectIds.map(getUsers)));
+        const getProfiles = (userId) => __awaiter(this, void 0, void 0, function* () {
+            const doc = admin.firestore().doc(`Users/${userId}`);
+            const user = (yield doc.get()).data();
+            return { [userId]: { displayName: user.profile.displayName, photoUrl: user.profile.photoURL } };
+        });
+        return yield Promise.all(Object.keys(userIds).map(getProfiles));
     });
-    return Promise.all(userIds.map(mapUserProfiles));
+    return promise(_projectIds).then(result => R.mergeAll(result));
 });
 //# sourceMappingURL=index.js.map

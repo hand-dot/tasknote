@@ -62,7 +62,7 @@
       </ion-row>
     </ion-grid> -->
 
-    <ion-item-sliding>
+    <ion-item-sliding ng-if="projects.length > 0">
       <ion-item>
         <div class="text">Web UI・UX Integration System</div>
         <div>
@@ -92,67 +92,6 @@
       </ion-item-options>
     </ion-item-sliding>
 
-    <!-- Sliding item 2 -->
-    <ion-item-sliding>
-      <ion-item>
-        <div class="text">Web UI・UX Integration System</div>
-        <div>
-          <ion-avatar class="profile small inline-block ">
-            <img src="{{ (user | async)?.profile.photoURL }}">
-          </ion-avatar>
-          <ion-avatar class="profile small inline-block">
-            <img src="{{ (user | async)?.profile.photoURL }}">
-          </ion-avatar>
-        </div>
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="primary">
-          <ion-icon name="text"></ion-icon>
-          Text
-        </button>
-        <button ion-button color="secondary">
-          <ion-icon name="call"></ion-icon>
-          Call
-        </button>
-      </ion-item-options>
-      <ion-item-options side="right">
-        <button ion-button color="primary">
-          <ion-icon name="mail"></ion-icon>
-          Email
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-
-    <!-- Sliding item 3 -->
-    <ion-item-sliding>
-      <ion-item>
-        <div class="text">Web UI・UX Integration System</div>
-        <div>
-          <ion-avatar class="profile small inline-block ">
-            <img src="{{ (user | async)?.profile.photoURL }}">
-          </ion-avatar>
-          <ion-avatar class="profile small inline-block">
-            <img src="{{ (user | async)?.profile.photoURL }}">
-          </ion-avatar>
-        </div>
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="primary">
-          <ion-icon name="text"></ion-icon>
-          Text
-        </button>
-        <button ion-button color="secondary">
-          <ion-icon name="call"></ion-icon>
-          Call
-        </button>
-      </ion-item-options>
-      <ion-item-options side="right">
-        <button ion-button color="primary">
-          <ion-icon name="mail"></ion-icon>
-          Email
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
   </ion-list>
 
 </ion-content>

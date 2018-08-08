@@ -31,12 +31,26 @@ exports.onProjectChange = functions.firestore
         return Promise.all(promises);
     });
 
+// Get Project User Profiles by projectIds
 exports.getUserProfiles = functions.https.onCall((data, context) => {
-    const userIds: string[] = R.propOr([], 'userIds')(data);
-    const mapUserProfiles = async userId => {
-        const doc = admin.firestore().doc(`Users/${userId}`);
-        const user = (await doc.get()).data();
-        return { userProfiles: { uuid: userId, displayName: user.profile.displayName, photoUrl: user.profile.photoURL } }
+    const _projectIds: string[] = R.propOr([], 'projectIds')(data);
+
+    const promise = async projectIds => {
+        const getUsers = async projectId => {
+            const doc = admin.firestore().doc(`Projects/${projectId}`);
+            return (await doc.get()).data().userIds;
+        };
+
+        const userIds: {} = R.mergeAll(await Promise.all(projectIds.map(getUsers)));
+
+        const getProfiles = async userId => {
+            const doc = admin.firestore().doc(`Users/${userId}`);
+            const user = (await doc.get()).data();
+            return { [userId]: { displayName: user.profile.displayName, photoUrl: user.profile.photoURL } }
+        };
+
+        return await Promise.all(Object.keys(userIds).map(getProfiles));
     };
-    return Promise.all(userIds.map(mapUserProfiles));
+
+    return promise(_projectIds).then(result => R.mergeAll(result));
 });

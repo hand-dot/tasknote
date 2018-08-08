@@ -12,19 +12,22 @@ import { User, Task, Project } from '../../common/interfaces';
 export class Profile {
   user: Observable<User>;
   projects: Observable<Project>[] = [];
-  projectUserProfiles: Promise<User[]>;
+  projectUserProfiles: Promise<any>;
   currentProject: number = -1;
 
   constructor(public navCtrl: NavController, public events: Events, private sharedService: SharedService) {
     this.user = sharedService.getUserObservable();
 
     this.user.subscribe(user => {
-      this.projects = sharedService.getProjectsObservable(Object.keys(user.projectIds || {}));
-      this.projects.forEach(projectObs => {
-        projectObs.subscribe(project => {
-          this.projectUserProfiles = sharedService.getUserProfiles({ userIds: Object.keys(project.userIds) });
-        });
-      });
+      const projectIds = Object.keys(user.projectIds || {});
+      this.projects = sharedService.getProjectsObservable(projectIds);
+      this.projectUserProfiles = sharedService.getUserProfiles(projectIds);
+      this.projectUserProfiles.then(result => console.error(result));
+
+      // this.projects.forEach(projectObs => {
+      //   projectObs.subscribe(project => {
+      //   });
+      // });
     });
   }
 

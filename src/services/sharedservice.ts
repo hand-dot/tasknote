@@ -27,9 +27,9 @@ export class SharedService {
         return doc.set({ profile: this.user.profile, projectIds: {} });
     }
 
-    public async getUserProfiles({ userIds } = { userIds: [] }): Promise<User[]> {
+    public async getUserProfiles(projectIds: string[] = []): Promise<any> {
         const getUserProfiles = firebase.functions().httpsCallable('getUserProfiles');
-        return getUserProfiles({ userIds }).then(result => result.data);
+        return getUserProfiles({ projectIds }).then(result => result.data);
     }
 
 
