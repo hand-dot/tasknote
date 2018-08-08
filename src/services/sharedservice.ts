@@ -27,6 +27,12 @@ export class SharedService {
         return doc.set({ profile: this.user.profile, projectIds: {} });
     }
 
+    public async getUserProfiles({ userIds } = { userIds: [] }): Promise<User[]> {
+        const getUserProfiles = firebase.functions().httpsCallable('getUserProfiles');
+        return getUserProfiles({ userIds }).then(result => result.data);
+    }
+
+
     public getUserObservable(): Observable<User> {
         const doc = this.afs.doc(`Users/${this.user.profile.uid}`);
         return doc.valueChanges().pipe(map(actions => actions as User));

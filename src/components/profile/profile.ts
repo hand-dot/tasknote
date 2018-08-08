@@ -12,15 +12,20 @@ import { User, Task, Project } from '../../common/interfaces';
 export class Profile {
   user: Observable<User>;
   projects: Observable<Project>[] = [];
+  projectUserProfiles: Promise<User[]>;
   currentProject: number = -1;
 
   constructor(public navCtrl: NavController, public events: Events, private sharedService: SharedService) {
     this.user = sharedService.getUserObservable();
-    this.projects = sharedService.getProjectsObservable(Object.keys(sharedService.user.projectIds || {}));
-    // this.projectDetailsObs.subscribe(data => {
-    //   console.error(data);
-    //   this.projectDetails.projectIds = data.projectIds;
-    // });
+
+    this.user.subscribe(user => {
+      this.projects = sharedService.getProjectsObservable(Object.keys(user.projectIds || {}));
+      this.projects.forEach(projectObs => {
+        projectObs.subscribe(project => {
+          this.projectUserProfiles = sharedService.getUserProfiles({ userIds: Object.keys(project.userIds) });
+        });
+      });
+    });
   }
 
   private selectProject(index: number): void {

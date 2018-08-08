@@ -30,3 +30,13 @@ exports.onProjectChange = functions.firestore
         const promises = R.concat(R.map(updateProjectIds(addProject), (R.keys(newUsers))), R.map(updateProjectIds(removeProject), (R.keys(oldUsers))));
         return Promise.all(promises);
     });
+
+exports.getUserProfiles = functions.https.onCall((data, context) => {
+    const userIds: string[] = R.propOr([], 'userIds')(data);
+    const mapUserProfiles = async userId => {
+        const doc = admin.firestore().doc(`Users/${userId}`);
+        const user = (await doc.get()).data();
+        return { userProfiles: { uuid: userId, displayName: user.profile.displayName, photoUrl: user.profile.photoURL } }
+    };
+    return Promise.all(userIds.map(mapUserProfiles));
+});
